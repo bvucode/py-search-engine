@@ -6,7 +6,23 @@ from pfts.ftsearch import Ftsearch
 from nlp.tokenize import Tokenize
 
 def helper():
-    print("usage: main.py [-h] [file_path file_words output_file]\nsearch engine\noptional arguments: \n-h, --help show this help message\n")
+    print("usage: main.py [-h] [file_paths file_words output_file]\nsearch engine\noptional arguments: \n-h, --help show this help message\n")
+
+def pathwalk(listpaths):
+    listfiles = []
+    for i in listpaths:
+        listdirs = []
+        # распечатать все файлы и папки рекурсивно
+        for dirpath, dirnames, filenames in os.walk(i):
+            # перебрать каталоги
+            for dirname in dirnames:
+                listdirs.append(os.path.join(dirpath, dirname))
+            # перебрать файлы
+            for filename in filenames:
+                listfiles.append(os.path.join(dirpath, filename))
+    if len(listdirs) == 0:
+        return listfiles
+    return pathwalk(listdirs)
 
 def indexer(fpaths, fwords, ofile):
     listpaths = []
@@ -18,16 +34,10 @@ def indexer(fpaths, fwords, ofile):
                 continue
             else:
                 listpaths.append(line.replace("\n", ""))
-    with open(fwords, "r") as file2:
-        text = file2.read()
-        # tokenize file to words
-        tokword = Tokenize(text)
-        tokwordload = tokword.words()
-    for i in listpaths:
-        directories = os.listdir(i)
+    directories = pathwalk(listpaths)
     for i in directories:
-        with open(listpaths[0] + i, "r") as file3:
-            text2 = file3.read()
+        with open(i, "r") as file2:
+            text2 = file2.read()
             # tokenize file to words
             tokword2 = Tokenize(text2)
             tokwordload2 = tokword2.words()
@@ -38,6 +48,11 @@ def indexer(fpaths, fwords, ofile):
             else:
                 u = Update(l, memo)
                 memo = u.load()
+    with open(fwords, "r") as file3:
+        text = file3.read()
+        # tokenize file to words
+        tokword = Tokenize(text)
+        tokwordload = tokword.words()
     for i in tokwordload:
         if i not in xlist:
             xlist.append(i)
@@ -49,6 +64,7 @@ def indexer(fpaths, fwords, ofile):
 
 def main():
     args = sys.argv[:]
+    listfiles = []
     for arg in args:
         if len(args) == 2 and arg == "-h" or arg == "--help":
             helper()
@@ -56,7 +72,6 @@ def main():
         elif len(args) == 4:
             indexer(args[1], args[2], args[3])
             break
-    print("done!")
 
 if __name__ == "__main__":
     # calling the main function

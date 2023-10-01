@@ -1,0 +1,9 @@
+/home/bulat/my_folder/data1.txt
+/home/bulat/my_folder/my_folder3/data1.txt
+/home/bulat/my_folder2/data1.txt
+/home/bulat/my_folder/data3.txt
+/home/bulat/my_folder/my_folder3/data3.txt
+/home/bulat/my_folder2/data3.txt
+/home/bulat/my_folder/data2.txt
+/home/bulat/my_folder/my_folder3/data2.txt
+/home/bulat/my_folder2/data2.txt
