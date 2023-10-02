@@ -12,7 +12,7 @@ class Indexing:
         for i in self.arg:
             if i not in memo.keys():
                 triallist = []
-                c = self.arg.count(i)
-                triallist.append((self.ind, c))
+                #c = self.arg.count(i)
+                triallist.append((self.ind, 1))
                 memo[i] = triallist
         return memo

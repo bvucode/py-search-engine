@@ -64,7 +64,6 @@ def indexer(fpaths, fwords, ofile):
 
 def main():
     args = sys.argv[:]
-    listfiles = []
     for arg in args:
         if len(args) == 2 and arg == "-h" or arg == "--help":
             helper()
