@@ -2,7 +2,6 @@ import os
 import sys
 from pfts.indexing import Indexing
 from pfts.update import Update
-from pfts.ftsearch import Ftsearch
 from nlp.tokenize import Tokenize
 
 def helper():
@@ -56,12 +55,11 @@ def indexer(fpaths, fwords, ofile):
     for i in tokwordload:
         if i not in xlist:
             xlist.append(i)
-    var = Ftsearch(xlist, memo)
-    xvar = var.load()
-    for k, v in xvar.items():
-        with open(ofile, "a") as f:
-            f.write(directories[k]+"\n")
-
+    for i in xlist:
+        if i in memo.keys():
+            for j in memo[i]:
+                with open(ofile, "a") as f:
+                    f.write(directories[j[0]] + " - " + i + "\n")
 def main():
     args = sys.argv[:]
     for arg in args:

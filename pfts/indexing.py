@@ -17,6 +17,6 @@ class Indexing:
             else:
                 triallist = []
                 w = memo[i]
-                triallist.append(self.ind, w[1] + 1)
+                triallist.append((self.ind, w[0][1] + 1))
                 memo[i] = triallist
         return memo
