@@ -5,7 +5,7 @@ from pfts.update import Update
 from nlp.tokenize import Tokenize
 
 def helper():
-    print("usage: main.py [-h] [file_paths file_words output_file]\nsearch engine\noptional arguments: \n-h, --help show this help message\n")
+    print("usage: main.py [-h] [file_paths file_words output_file]\nsearch engine\noptional arguments: \n-h, --help show this help message")
 
 def pathwalk(listpaths):
     listfiles = []
@@ -36,17 +36,20 @@ def indexer(fpaths, fwords, ofile):
     directories = pathwalk(listpaths)
     for i in directories:
         with open(i, "r") as file2:
-            text2 = file2.read()
-            # tokenize file to words
-            tokword2 = Tokenize(text2)
-            tokwordload2 = tokword2.words()
-            r = Indexing(tokwordload2, directories.index(i))
-            l = r.load()
-            if directories.index(i) == 0:
-                memo = l
-            else:
-                u = Update(l, memo)
-                memo = u.load()
+            try:
+                text2 = file2.read()
+                # tokenize file to words
+                tokword2 = Tokenize(text2)
+                tokwordload2 = tokword2.words()
+                r = Indexing(tokwordload2, directories.index(i))
+                l = r.load()
+                if directories.index(i) == 0:
+                    memo = l
+                else:
+                    u = Update(l, memo)
+                    memo = u.load()
+            except:
+                continue
     with open(fwords, "r") as file3:
         text = file3.read()
         # tokenize file to words
@@ -63,7 +66,7 @@ def indexer(fpaths, fwords, ofile):
 def main():
     args = sys.argv[:]
     for arg in args:
-        if len(args) == 2 and arg == "-h" or arg == "--help":
+        if len(args) == 2 and arg == "-h" or len(args) == 2 and arg == "--help":
             helper()
             break
         elif len(args) == 4:
