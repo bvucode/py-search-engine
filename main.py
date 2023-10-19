@@ -1,5 +1,6 @@
 import os
 import sys
+import re
 from pfts.indexing import Indexing
 from pfts.update import Update
 from nlp.tokenize import Tokenize
@@ -28,11 +29,8 @@ def indexer(fpaths, fwords, ofile):
     xlist = []
     memo = {}
     with open(fpaths, "r") as file:
-        for line in file:
-            if not line:
-                continue
-            else:
-                listpaths.append(line.replace("\n", ""))
+        text = file.read()
+        listpaths = re.split(" ", text.replace("\n", ""))
     directories = pathwalk(listpaths)
     for i in directories:
         with open(i, "r") as file2:
