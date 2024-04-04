@@ -1,12 +1,12 @@
 import re
 
 class Tokenize:
-    """ класс делает токинезацию по словам """
+    """ tokenize class"""
     def __init__(self, text):
         self.text = text
 
     def words(self):
-        """ токенизация по словам """
+        """ tokenize words """
         self.lowertext = self.text.lower()
         self.clearstring = re.sub("[\t\r\n\f\v]", " ", self.lowertext)
         self.onestring = re.sub("[ё]", "е", self.clearstring)
@@ -16,7 +16,7 @@ class Tokenize:
         return self.filtered
 
     def sentences(self):
-        """ токенизация по предложениям """
+        """ tokenize sentences """
         self.lowertext = self.text.lower()
         self.clearstring = re.sub("[\t\r\n\f\v]", "", self.lowertext)
         self.onestring = re.sub("[ё]", "е", self.clearstring)

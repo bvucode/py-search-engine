@@ -1,12 +1,12 @@
 
 class Stemming:
-    """класс для стеминга"""
+    """ stemming class """
     def __init__(self, llist, rlist):
         self.llist = llist
         self.rlist = rlist
 
     def binarysearch(self, xlist, item):
-        """бинарный поиск"""
+        """ bynary search method """
         self.xlist = xlist
         self.item = item
         low:int = 0
@@ -22,7 +22,7 @@ class Stemming:
         return False
 
     def load(self, text):
-        """стеминг"""
+        """ stemming method """
         self.text = text
         slist = []
         
