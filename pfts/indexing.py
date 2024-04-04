@@ -1,12 +1,12 @@
 
 class Indexing:
-    """класс индексации файла"""
+    """ indexing class """
     def __init__(self, arg, ind):
         self.arg = arg
         self.ind = ind
 
     def load(self):
-        """индексация"""
+        """ indexing method """
         memo = {}
 
         for i in self.arg:

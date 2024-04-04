@@ -1,12 +1,12 @@
 
 class Update:
-    """класс индексации файла"""
+    """ update class"""
     def __init__(self, newdict, olddict):
         self.newdict = newdict
         self.olddict = olddict
 
     def load(self):
-        """индексация"""
+        """ update method """
         for k, v in self.newdict.items():
             if k in self.olddict.keys():
                 t = []
